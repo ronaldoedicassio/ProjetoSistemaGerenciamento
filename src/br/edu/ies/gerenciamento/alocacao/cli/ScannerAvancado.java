@@ -1,6 +1,5 @@
 package br.edu.ies.gerenciamento.alocacao.cli;
 
-import java.awt.geom.Area;
 import java.util.Scanner;
 
 import br.edu.ies.gerenciamento.alocacao.modelo.AreaDepartamento;
