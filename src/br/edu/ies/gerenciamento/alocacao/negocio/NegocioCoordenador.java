@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import br.edu.ies.gerenciamento.alocacao.modelo.Coordenador;
 import br.edu.ies.gerenciamento.alocacao.modelo.Curso;
 import br.edu.ies.gerenciamento.alocacao.modelo.Professor;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.CursoInexistenteException;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.DepartamentoCursoDifrenteProfessorException;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeDuplicadoExcepetion;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeInvalidoException;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeProfessorInexisteException;
 import br.edu.ies.gerenciamento.alocacao.repositorio.RepositorioCoordenador;
 import br.edu.ies.gerenciamento.alocacao.repositorio.RepositorioCurso;
 import br.edu.ies.gerenciamento.alocacao.repositorio.RepositorioDepartamento;
 import br.edu.ies.gerenciamento.alocacao.repositorio.RepositorioProfessor;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.CursoInexistenteException;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.DepartamentoCursoDifrenteProfessorException;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.NomeDuplicadoExcepetion;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.NomeInvalidoException;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.NomeProfessorInexisteException;
 
 public class NegocioCoordenador {
 	private RepositorioCoordenador repositorioCoordenador;
@@ -61,13 +61,6 @@ public class NegocioCoordenador {
 
 	}
 
-//	public void isPertenceDepartamento(Curso curso, String nome)
-//			throws DepartamentoCursoDifrenteProfessorException {
-//		if (!curso.getDepartamentoCurso().getNomeDepartamento().equals(nome.getDepartamento().getNomeDepartamento())) {
-//			throw new DepartamentoCursoDifrenteProfessorException();
-//		}
-//	}
-
 	public Curso isPertenceDepartamento(String cursoCoordenado, String nomeCoordenador, NegocioCurso negocioCurso,
 			NegocioProfessor negocioProfessor) throws DepartamentoCursoDifrenteProfessorException,
 			CursoInexistenteException, NomeProfessorInexisteException {
@@ -80,7 +73,8 @@ public class NegocioCoordenador {
 			return curso;
 
 		} else {
-			throw new DepartamentoCursoDifrenteProfessorException();
+			throw new DepartamentoCursoDifrenteProfessorException(
+					"O departamento do professor " + nomeCoordenador + "e diferente do departamento do curso");
 		}
 	}
 
@@ -120,8 +114,9 @@ public class NegocioCoordenador {
 	public Coordenador inserir(Coordenador coordenador) throws NomeInvalidoException, NomeDuplicadoExcepetion,
 			NomeProfessorInexisteException, DepartamentoCursoDifrenteProfessorException, CursoInexistenteException {
 
-		Professor professor = validarCoordenador(coordenador.getNome(),negocioProfessor);
-		isPertenceDepartamento(coordenador.getCursosCoordenados().getNomeCurso(), professor.getNome(),negocioCurso,negocioProfessor);
+		Professor professor = validarCoordenador(coordenador.getNome(), negocioProfessor);
+		isPertenceDepartamento(coordenador.getCursosCoordenados().getNomeCurso(), professor.getNome(), negocioCurso,
+				negocioProfessor);
 
 		return repositorioCoordenador.inserir(coordenador);
 

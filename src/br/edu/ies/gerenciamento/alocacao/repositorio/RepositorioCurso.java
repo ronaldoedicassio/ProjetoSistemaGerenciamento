@@ -3,8 +3,8 @@ package br.edu.ies.gerenciamento.alocacao.repositorio;
 import java.util.ArrayList;
 
 import br.edu.ies.gerenciamento.alocacao.modelo.Curso;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.NomeDuplicadoExcepetion;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.NomeInvalidoException;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeDuplicadoExcepetion;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeInvalidoException;
 
 public class RepositorioCurso {
 

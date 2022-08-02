@@ -4,9 +4,9 @@ import br.edu.ies.gerenciamento.alocacao.modelo.Curso;
 import br.edu.ies.gerenciamento.alocacao.negocio.NegocioCurso;
 import br.edu.ies.gerenciamento.alocacao.negocio.NegocioDepartamento;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.DepartamentoInexistenteException;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.NomeDuplicadoExcepetion;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.NomeInvalidoException;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.SiglaDuplicadoExcepetion;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeDuplicadoExcepetion;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeInvalidoException;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.SiglaDuplicadoExcepetion;
 
 public class CursoInterface {
 

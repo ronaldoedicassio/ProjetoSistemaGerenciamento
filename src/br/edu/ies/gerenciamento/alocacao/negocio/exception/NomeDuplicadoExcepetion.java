@@ -1,4 +1,4 @@
-package br.edu.ies.gerenciamento.alocacao.repositorio.exceptions;
+package br.edu.ies.gerenciamento.alocacao.negocio.exception;
 
 public class NomeDuplicadoExcepetion extends Exception {
 

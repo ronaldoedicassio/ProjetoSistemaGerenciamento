@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import br.edu.ies.gerenciamento.alocacao.modelo.Curso;
 import br.edu.ies.gerenciamento.alocacao.modelo.Departamento;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.DepartamentoInexistenteException;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeDuplicadoExcepetion;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeInvalidoException;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.SiglaDuplicadoExcepetion;
 import br.edu.ies.gerenciamento.alocacao.repositorio.RepositorioCurso;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.NomeDuplicadoExcepetion;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.NomeInvalidoException;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.SiglaDuplicadoExcepetion;
 import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.TipoErro;
 
 public class NegocioCurso {
@@ -47,9 +47,6 @@ public class NegocioCurso {
 	public Curso procurarSigla(String sigla, RepositorioCurso repositorioCurso) {
 		return repositorioCurso.procurarSigla(sigla);
 	}
-//	public Curso procurarSigla(String sigla, RepositorioCurso repositorioCurso) {
-//		return repositorioCurso.procurarSigla(sigla);
-//	}
 
 	public void validarSigla(String siglaCurso, NegocioDepartamento negocioDepartamento)
 			throws SiglaDuplicadoExcepetion {

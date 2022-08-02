@@ -1,4 +1,6 @@
-package br.edu.ies.gerenciamento.alocacao.repositorio.exceptions;
+package br.edu.ies.gerenciamento.alocacao.negocio.exception;
+
+import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.TipoErro;
 
 public class NomeInvalidoException extends Exception {
 	private TipoErro tipoErro;

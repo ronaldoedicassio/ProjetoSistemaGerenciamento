@@ -7,11 +7,11 @@ import br.edu.ies.gerenciamento.alocacao.modelo.AreaDepartamento;
 import br.edu.ies.gerenciamento.alocacao.modelo.Curso;
 import br.edu.ies.gerenciamento.alocacao.modelo.Departamento;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.DepartamentoInexistenteException;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeDuplicadoExcepetion;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeInvalidoException;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.SiglaDuplicadoExcepetion;
 import br.edu.ies.gerenciamento.alocacao.repositorio.RepositorioCurso;
 import br.edu.ies.gerenciamento.alocacao.repositorio.RepositorioDepartamento;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.NomeDuplicadoExcepetion;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.NomeInvalidoException;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.SiglaDuplicadoExcepetion;
 import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.TipoErro;
 
 public class NegocioDepartamento {
@@ -98,7 +98,7 @@ public class NegocioDepartamento {
 
 	public Departamento inserir(Departamento item) throws NomeDuplicadoExcepetion, NomeInvalidoException {
 
-		validarNome(item.getNomeDepartamento());
+		validarNome(item.getNomeDepartamento());		
 		return repositorioDepartamento.inserir(item);
 	}
 }

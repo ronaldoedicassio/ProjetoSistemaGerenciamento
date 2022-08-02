@@ -4,12 +4,12 @@ import br.edu.ies.gerenciamento.alocacao.modelo.Departamento;
 import br.edu.ies.gerenciamento.alocacao.modelo.Professor;
 import br.edu.ies.gerenciamento.alocacao.negocio.NegocioDepartamento;
 import br.edu.ies.gerenciamento.alocacao.negocio.NegocioProfessor;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.CPFQuantidadeCaracteresException;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.CpfDuplicadoExcepetion;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.DepartamentoInexistenteException;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeDuplicadoExcepetion;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeInvalidoException;
 import br.edu.ies.gerenciamento.alocacao.repositorio.RepositorioDepartamento;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.CPFQuantidadeCaracteresException;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.CpfDuplicadoExcepetion;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.NomeDuplicadoExcepetion;
-import br.edu.ies.gerenciamento.alocacao.repositorio.exceptions.NomeInvalidoException;
 
 public class ProfessorInterface {
 
