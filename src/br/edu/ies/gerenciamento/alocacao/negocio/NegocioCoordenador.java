@@ -56,7 +56,7 @@ public class NegocioCoordenador {
 			nome = "Coord " + nome;
 			return nome;
 		} else {
-			throw new NomeProfessorInexisteException();
+			throw new NomeProfessorInexisteException("Professor nao esta cadastrado");
 		}
 
 	}
@@ -84,7 +84,7 @@ public class NegocioCoordenador {
 		if (curso != null) {
 			return curso;
 		} else {
-			throw new CursoInexistenteException();
+			throw new CursoInexistenteException("Curso nao esta cadastrado");
 		}
 	}
 
@@ -96,7 +96,7 @@ public class NegocioCoordenador {
 		if (professor != null) {
 			return professor;
 		} else {
-			throw new NomeProfessorInexisteException();
+			throw new NomeProfessorInexisteException("Professor nao esta cadastrado");
 		}
 
 	}

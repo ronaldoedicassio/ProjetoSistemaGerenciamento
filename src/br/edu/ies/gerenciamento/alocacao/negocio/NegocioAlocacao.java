@@ -30,7 +30,15 @@ public class NegocioAlocacao {
 		return repositorioAlocacao.procuraTodos();
 	}
 
-	public Alocacao inserir(Alocacao alocacao) {
+	public Alocacao inserir(Alocacao alocacao) throws AlocacaoExistenteExcepetion,
+			DepartamentoCursoDifrenteProfessorException, DataHoraExistenteException, NomeProfessorInexisteException, CursoInexistenteException {
+		Alocacao item = validarAlocacao(alocacao.getProfessor(), alocacao.getCurso());
+//		procuraProfessor(alocacao.getProfessor().getNome());
+//		procurarCurso(alocacao.getCurso().getNomeCurso());
+		if (item != null) {
+			validarDataHora(alocacao, item);
+		}
+
 		return repositorioAlocacao.inserir(alocacao);
 	}
 
@@ -47,16 +55,15 @@ public class NegocioAlocacao {
 		if (item != null) {
 			return item;
 		} else {
-			throw new CursoInexistenteException();
+			throw new CursoInexistenteException("Curso não esta cadastrado");
 		}
 	}
 
-	public void validarDataHora(Alocacao alocacao, Professor professor, String data, String hora)
-			throws DataHoraExistenteException {
+	public void validarDataHora(Alocacao alocacao, Alocacao item) throws DataHoraExistenteException {
 
-		if (alocacao != null & alocacao.getProfessor().equals(professor) & alocacao.getDiaDaSemana().equals(data)
-				& alocacao.getHorario().equals(hora)) {
-			throw new DataHoraExistenteException(professor.getNome() + " Ja ministrar outro curso neste horario");
+		if (item.getDiaDaSemana().equals(alocacao.getDiaDaSemana()) & item.getHorario().equals(alocacao.getHorario())) {
+			throw new DataHoraExistenteException(item.getProfessor().getNome() + " ja ministra o curso "
+					+ item.getCurso().getNomeCurso() + " neste horario");
 		}
 
 	}
@@ -67,7 +74,7 @@ public class NegocioAlocacao {
 		alocacao = repositorioAlocacao.procuraPorAlocacao(professor, curso);
 		if (alocacao != null) {
 			throw new AlocacaoExistenteExcepetion("Este Professor ja esta alocado ao curso informado");
-		} else if (professor.getDepartamento().getNomeDepartamento()
+		} else if (!professor.getDepartamento().getNomeDepartamento()
 				.equals(curso.getDepartamentoCurso().getNomeDepartamento())) {
 			throw new DepartamentoCursoDifrenteProfessorException(
 					"Departamento do professor precisa ser o mesmo do departamento do curso");

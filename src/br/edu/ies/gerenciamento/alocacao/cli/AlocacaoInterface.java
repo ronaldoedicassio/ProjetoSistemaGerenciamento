@@ -31,10 +31,8 @@ public class AlocacaoInterface {
 				Professor professor = negocioAlocacao.procuraProfessor(nomeProfessor, negocioProfessor);
 				String nomeCurso = scanner.pedirString("Forneça o curso que o professor sera alocado ");
 				Curso curso = negocioAlocacao.procurarCurso(nomeCurso, negocioCurso);
-				Alocacao alocacao = negocioAlocacao.validarAlocacao(professor, curso);
 				String data = scanner.pedirString("Dia da semana da alocacao ");
 				String hora = scanner.pedirString("Hora da alocacao");
-				negocioAlocacao.validarDataHora(alocacao, professor, data, hora);
 
 				negocioAlocacao.inserir(new Alocacao(professor, curso, data, hora));
 

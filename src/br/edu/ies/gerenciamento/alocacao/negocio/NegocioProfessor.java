@@ -30,12 +30,24 @@ public class NegocioProfessor {
 	public Professor procuraNome(String nome) throws NomeProfessorInexisteException {
 		Professor item = null;
 		item = repositorioProfessor.procurarPorNome(nome);
-		if (item !=null) {
+		if (item != null) {
 			return item;
-		}else {
-			throw new NomeProfessorInexisteException();
+		} else {
+			throw new NomeProfessorInexisteException("Professor não esta cadastrado");
 		}
-		
+
+	}
+
+	public Professor procuraNome(String nome, RepositorioProfessor repositorioProfessor)
+			throws NomeProfessorInexisteException {
+		Professor item = null;
+		item = repositorioProfessor.procurarPorNome(nome);
+		if (item != null) {
+			return item;
+		} else {
+			throw new NomeProfessorInexisteException("Professor não esta cadastrado");
+		}
+
 	}
 
 	public Professor procurarCPF(String cpf) {
@@ -67,7 +79,7 @@ public class NegocioProfessor {
 	public void validarCPF(String cpf) throws CpfDuplicadoExcepetion, CPFQuantidadeCaracteresException {
 		if (procurarCPF(cpf) != null) {
 			throw new CpfDuplicadoExcepetion("CPF ja existente");
-		}else if(cpf.length() != 11) {
+		} else if (cpf.length() != 11) {
 			throw new CPFQuantidadeCaracteresException("Quantidade de Caracteres tem que ser igual a 11");
 		}
 
