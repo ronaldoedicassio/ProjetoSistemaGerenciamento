@@ -4,7 +4,7 @@ public class CursoInexistenteException extends Exception {
 	private String cursoInexistenteException;
 	
 	public CursoInexistenteException(String cursoInexistenteException) {
-		super("Professor não esta cadastro");
+		super("Curso não esta cadastro");
 		this.cursoInexistenteException = cursoInexistenteException;
 	}
 

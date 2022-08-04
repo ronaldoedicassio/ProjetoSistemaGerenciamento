@@ -1,6 +1,7 @@
 package br.edu.ies.gerenciamento.alocacao.negocio;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import br.edu.ies.gerenciamento.alocacao.modelo.Alocacao;
 import br.edu.ies.gerenciamento.alocacao.modelo.Curso;
@@ -15,7 +16,7 @@ import br.edu.ies.gerenciamento.alocacao.repositorio.RepositorioAlocacao;
 public class NegocioAlocacao {
 
 	private RepositorioAlocacao repositorioAlocacao;
-	
+
 	public NegocioAlocacao(RepositorioAlocacao repositorioAlocacao, NegocioProfessor negocioProfessor,
 			NegocioCurso negocioCurso) {
 		super();
@@ -52,18 +53,18 @@ public class NegocioAlocacao {
 		}
 	}
 
-	public Alocacao procurarProfessorAlocado(String nome) {
-		return repositorioAlocacao.procuraPorNomeProfessor(nome);
+	public ArrayList<Alocacao> procurarProfessorAlocado() {
+		return repositorioAlocacao.procuraTodos();
 	}
 
 	public void validarDataHora(Alocacao alocacao) throws DataHoraExistenteException {
 
-		Alocacao procurarAlocado = procurarProfessorAlocado(alocacao.getProfessor().getNome());
-		if (procurarAlocado != null) {
-			if (alocacao.getDiaDaSemana().equals(procurarAlocado.getDiaDaSemana())
-					& alocacao.getHorario().equals(procurarAlocado.getHorario())) {
-				throw new DataHoraExistenteException("Professor " + procurarAlocado.getProfessor().getNome()
-						+ " ja tem aula nesse mesmo horario" + "no curso " + procurarAlocado.getCurso().getNomeCurso());
+		ArrayList<Alocacao> procurarAlocado = procurarProfessorAlocado();
+		for (Alocacao item : procurarAlocado) {
+			if (item.getDiaDaSemana().equals(alocacao.getDiaDaSemana())
+					& item.getHorario().equals(alocacao.getHorario())) {
+				throw new DataHoraExistenteException(
+						alocacao.getProfessor().getNome() + " ja esta alocado em outro curso neste mesmo dia e hora");
 			}
 		}
 	}
