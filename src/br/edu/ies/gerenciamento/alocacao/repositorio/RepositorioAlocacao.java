@@ -25,9 +25,19 @@ public class RepositorioAlocacao {
 
 	public Alocacao procuraPorID(int id) {
 		Alocacao item = null;
-
 		for (Alocacao alocacao : colecao) {
 			if (alocacao.getId() == id) {
+				item = alocacao;
+				break;
+			}
+		}
+		return item;
+	}
+
+	public Alocacao procuraPorNomeProfessor(String nome) {
+		Alocacao item = null;
+		for (Alocacao alocacao : colecao) {
+			if (alocacao.getProfessor().getNome().equals(nome)) {
 				item = alocacao;
 				break;
 			}
@@ -39,8 +49,7 @@ public class RepositorioAlocacao {
 		Alocacao item = null;
 
 		for (Alocacao alocacao : colecao) {
-			if (alocacao.getCurso().equals(curso)
-					& alocacao.getProfessor().equals(professor)) {
+			if (alocacao.getCurso().equals(curso) & alocacao.getProfessor().equals(professor)) {
 				item = alocacao;
 				break;
 			}
