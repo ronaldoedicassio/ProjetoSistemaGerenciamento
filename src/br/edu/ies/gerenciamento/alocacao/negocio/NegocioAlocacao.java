@@ -15,15 +15,11 @@ import br.edu.ies.gerenciamento.alocacao.repositorio.RepositorioAlocacao;
 public class NegocioAlocacao {
 
 	private RepositorioAlocacao repositorioAlocacao;
-	private NegocioProfessor negocioProfessor;
-	private NegocioCurso negocioCurso;
-
+	
 	public NegocioAlocacao(RepositorioAlocacao repositorioAlocacao, NegocioProfessor negocioProfessor,
 			NegocioCurso negocioCurso) {
 		super();
 		this.repositorioAlocacao = repositorioAlocacao;
-		this.negocioProfessor = negocioProfessor;
-		this.negocioCurso = negocioCurso;
 	}
 
 	public ArrayList<Alocacao> procuraTodos() {

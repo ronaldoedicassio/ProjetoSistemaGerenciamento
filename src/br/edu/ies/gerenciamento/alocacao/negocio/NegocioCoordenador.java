@@ -11,18 +11,11 @@ import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeDuplicadoExcepeti
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeInvalidoException;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeProfessorInexisteException;
 import br.edu.ies.gerenciamento.alocacao.repositorio.RepositorioCoordenador;
-import br.edu.ies.gerenciamento.alocacao.repositorio.RepositorioCurso;
-import br.edu.ies.gerenciamento.alocacao.repositorio.RepositorioDepartamento;
-import br.edu.ies.gerenciamento.alocacao.repositorio.RepositorioProfessor;
 
 public class NegocioCoordenador {
 	private RepositorioCoordenador repositorioCoordenador;
-	private NegocioDepartamento negocioDepartamento;
 	private NegocioCurso negocioCurso;
 	private NegocioProfessor negocioProfessor;
-	private RepositorioProfessor repositorioProfessor;
-	private RepositorioDepartamento repositorioDepartamento;
-	private RepositorioCurso repositorioCurso;
 
 	public NegocioCoordenador(RepositorioCoordenador repositorioCoordenador, NegocioCurso negocioCurso,
 			NegocioProfessor negocioProfessor) {
@@ -100,16 +93,6 @@ public class NegocioCoordenador {
 		}
 
 	}
-
-//	public Professor isValidando(String nomeCoordenador) throws NomeProfessorInexisteException {
-//
-//		Professor professor = repositorioProfessor.procurarPorNome(nomeCoordenador);
-//		if (professor != null) {
-//			return professor;
-//		} else {
-//			throw new NomeProfessorInexisteException();
-//		}
-//	}
 
 	public Coordenador inserir(Coordenador coordenador) throws NomeInvalidoException, NomeDuplicadoExcepetion,
 			NomeProfessorInexisteException, DepartamentoCursoDifrenteProfessorException, CursoInexistenteException {

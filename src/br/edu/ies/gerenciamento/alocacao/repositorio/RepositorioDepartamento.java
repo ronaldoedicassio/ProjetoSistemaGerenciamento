@@ -1,6 +1,5 @@
 package br.edu.ies.gerenciamento.alocacao.repositorio;
 
-import java.awt.geom.Area;
 import java.util.ArrayList;
 
 import br.edu.ies.gerenciamento.alocacao.modelo.Curso;
@@ -61,18 +60,6 @@ public class RepositorioDepartamento {
 
 		return item;
 	}
-
-//	public Departamento procuraSigla(String sigla, RepositorioCurso repositorioCurso) {
-//		Departamento item = null;
-//		for (Departamento departamento : colecao) {
-//			if (departamento.getSiglaDepartamento().toLowerCase().equals(procuraSiglaCurso(sigla, repositorioCurso))) {
-//				item = departamento;
-//				break;
-//			}
-//		}
-//
-//		return item;
-//	}
 
 	public Curso procuraSiglaCurso(String sigla, RepositorioCurso repositorioCurso) {
 		return repositorioCurso.procurarSigla(sigla);
