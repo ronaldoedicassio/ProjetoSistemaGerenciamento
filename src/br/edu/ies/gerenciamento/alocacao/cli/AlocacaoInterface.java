@@ -8,6 +8,7 @@ import br.edu.ies.gerenciamento.alocacao.negocio.NegocioCurso;
 import br.edu.ies.gerenciamento.alocacao.negocio.NegocioProfessor;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.AlocacaoExistenteExcepetion;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.CursoInexistenteException;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.CursoPreenchidoException;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.DataHoraExistenteException;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.DepartamentoCursoDifrenteProfessorException;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeProfessorInexisteException;
@@ -46,6 +47,8 @@ public class AlocacaoInterface {
 				System.out.println(dcpe.getDepartamentoCursoDifrenteProfessorException());
 			} catch (DataHoraExistenteException dhee) {
 				System.out.println(dhee.getDataHoraExistenteException());
+			} catch (CursoPreenchidoException cpe) {
+				System.out.println(cpe.getCursoPreenchidoException());
 			}
 
 		}

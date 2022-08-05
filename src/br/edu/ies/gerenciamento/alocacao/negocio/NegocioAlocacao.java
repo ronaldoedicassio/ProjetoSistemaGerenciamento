@@ -8,6 +8,7 @@ import br.edu.ies.gerenciamento.alocacao.modelo.Curso;
 import br.edu.ies.gerenciamento.alocacao.modelo.Professor;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.AlocacaoExistenteExcepetion;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.CursoInexistenteException;
+import br.edu.ies.gerenciamento.alocacao.negocio.exception.CursoPreenchidoException;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.DataHoraExistenteException;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.DepartamentoCursoDifrenteProfessorException;
 import br.edu.ies.gerenciamento.alocacao.negocio.exception.NomeProfessorInexisteException;
@@ -29,7 +30,7 @@ public class NegocioAlocacao {
 
 	public Alocacao inserir(Alocacao alocacao)
 			throws AlocacaoExistenteExcepetion, DepartamentoCursoDifrenteProfessorException, DataHoraExistenteException,
-			NomeProfessorInexisteException, CursoInexistenteException {
+			NomeProfessorInexisteException, CursoInexistenteException, CursoPreenchidoException {
 
 		validarAlocacao(alocacao.getProfessor(), alocacao.getCurso(), alocacao);
 
@@ -53,24 +54,16 @@ public class NegocioAlocacao {
 		}
 	}
 
-	public ArrayList<Alocacao> procurarProfessorAlocado() {
+	public ArrayList<Alocacao> procurarTodos() {
 		return repositorioAlocacao.procuraTodos();
 	}
 
-	public void validarDataHora(Alocacao alocacao) throws DataHoraExistenteException {
-
-		ArrayList<Alocacao> procurarAlocado = procurarProfessorAlocado();
-		for (Alocacao item : procurarAlocado) {
-			if (item.getDiaDaSemana().equals(alocacao.getDiaDaSemana())
-					& item.getHorario().equals(alocacao.getHorario())) {
-				throw new DataHoraExistenteException(
-						alocacao.getProfessor().getNome() + " ja esta alocado em outro curso neste mesmo dia e hora");
-			}
-		}
-	}
-
 	public void validarAlocacao(Professor professor, Curso curso, Alocacao alocacao) throws AlocacaoExistenteExcepetion,
-			DepartamentoCursoDifrenteProfessorException, DataHoraExistenteException {
+			DepartamentoCursoDifrenteProfessorException, DataHoraExistenteException, CursoPreenchidoException {
+
+		// validar que o professor não esteja alocado no mesmo curso
+		// validar que o professor esteja com horario livre
+		// validar que o curso esteja sem alocação
 
 		Alocacao item = null;
 		item = repositorioAlocacao.procuraPorAlocacao(professor, curso);
@@ -82,8 +75,43 @@ public class NegocioAlocacao {
 			throw new DepartamentoCursoDifrenteProfessorException(
 					"Departamento do professor precisa ser o mesmo do departamento do curso");
 		} else {
-			validarDataHora(alocacao);
+			validarCursoAlocado(alocacao, curso.getNomeCurso());
+			ArrayList<Alocacao> cursoProfessor = procurarCursosPorProfessor(alocacao, professor.getNome());
+			if (cursoProfessor != null) {
+				validarDataHoraDisponivel(cursoProfessor, alocacao);
+			}
 		}
 	}
 
+	private void validarDataHoraDisponivel(ArrayList<Alocacao> cursoProfessor, Alocacao alocacao)
+			throws DataHoraExistenteException {
+		for (Alocacao item : cursoProfessor) {
+			if(item.getDiaDaSemana().equals(alocacao.getDiaDaSemana()) & item.getHorario().equals(alocacao.getHorario())) {
+				throw new DataHoraExistenteException("Este horario indisponivel, pois esta sendo ministrado pelo curso " + item.getCurso().getNomeCurso());
+			}
+			
+		}
+		
+	}
+
+	private ArrayList<Alocacao> procurarCursosPorProfessor(Alocacao alocacao, String nome) {
+		ArrayList<Alocacao> professorCursosMinistrado = new ArrayList<Alocacao>();
+		ArrayList<Alocacao> procurarAlocado = procurarTodos();
+		for (Alocacao item : procurarAlocado) {
+			if (item.getProfessor().getNome().equals(nome)) {
+				professorCursosMinistrado.add(item);
+			}
+		}
+		return professorCursosMinistrado;
+	}
+
+	private void validarCursoAlocado(Alocacao alocacao, String nomeCurso) throws CursoPreenchidoException {
+		ArrayList<Alocacao> procurarAlocado = procurarTodos();
+		for (Alocacao item : procurarAlocado) {
+			if (item.getCurso().getNomeCurso().equals(nomeCurso)) {
+				throw new CursoPreenchidoException("Curso " +
+						item.getCurso().getNomeCurso() + " ja esta ministrado pelo professor(a) " + item.getProfessor().getNome());
+			}
+		}
+	}
 }
