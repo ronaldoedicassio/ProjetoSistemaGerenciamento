@@ -56,6 +56,18 @@ public class RepositorioAlocacao {
 		}
 		return item;
 	}
+	
+	public ArrayList<Alocacao> procurarAlocacoesPorProfessor(String nome) {
+		ArrayList<Alocacao> professorCursosMinistrado = new ArrayList<Alocacao>();
+		ArrayList<Alocacao> procurarAlocado = procuraTodos();
+		for (Alocacao item : procurarAlocado) {
+			if (item.getProfessor().getNome().equals(nome)) {
+				professorCursosMinistrado.add(item);
+			}
+		}
+		return new ArrayList<>(professorCursosMinistrado);
+	}
+
 
 	public ArrayList<Alocacao> procuraTodos() {
 		return new ArrayList<>(colecao);

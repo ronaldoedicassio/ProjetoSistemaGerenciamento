@@ -61,10 +61,6 @@ public class NegocioAlocacao {
 	public void validarAlocacao(Professor professor, Curso curso, Alocacao alocacao) throws AlocacaoExistenteExcepetion,
 			DepartamentoCursoDifrenteProfessorException, DataHoraExistenteException, CursoPreenchidoException {
 
-		// validar que o professor não esteja alocado no mesmo curso
-		// validar que o professor esteja com horario livre
-		// validar que o curso esteja sem alocação
-
 		Alocacao item = null;
 		item = repositorioAlocacao.procuraPorAlocacao(professor, curso);
 
@@ -76,7 +72,7 @@ public class NegocioAlocacao {
 					"Departamento do professor precisa ser o mesmo do departamento do curso");
 		} else {
 			validarCursoAlocado(alocacao, curso.getNomeCurso());
-			ArrayList<Alocacao> cursoProfessor = procurarCursosPorProfessor(alocacao, professor.getNome());
+			ArrayList<Alocacao> cursoProfessor = procurarAlocacoesPorProfessor(alocacao, professor.getNome());
 			if (cursoProfessor != null) {
 				validarDataHoraDisponivel(cursoProfessor, alocacao);
 			}
@@ -86,31 +82,25 @@ public class NegocioAlocacao {
 	private void validarDataHoraDisponivel(ArrayList<Alocacao> cursoProfessor, Alocacao alocacao)
 			throws DataHoraExistenteException {
 		for (Alocacao item : cursoProfessor) {
-			if(item.getDiaDaSemana().equals(alocacao.getDiaDaSemana()) & item.getHorario().equals(alocacao.getHorario())) {
-				throw new DataHoraExistenteException("Este horario indisponivel, pois esta sendo ministrado pelo curso " + item.getCurso().getNomeCurso());
+			if (item.getDiaDaSemana().equals(alocacao.getDiaDaSemana())
+					& item.getHorario().equals(alocacao.getHorario())) {
+				throw new DataHoraExistenteException("Este horario indisponivel, pois esta sendo ministrado pelo curso "
+						+ item.getCurso().getNomeCurso());
 			}
-			
 		}
-		
 	}
 
-	private ArrayList<Alocacao> procurarCursosPorProfessor(Alocacao alocacao, String nome) {
-		ArrayList<Alocacao> professorCursosMinistrado = new ArrayList<Alocacao>();
-		ArrayList<Alocacao> procurarAlocado = procurarTodos();
-		for (Alocacao item : procurarAlocado) {
-			if (item.getProfessor().getNome().equals(nome)) {
-				professorCursosMinistrado.add(item);
-			}
-		}
-		return professorCursosMinistrado;
+	private ArrayList<Alocacao> procurarAlocacoesPorProfessor(Alocacao alocacao, String nome) {
+
+		return repositorioAlocacao.procurarAlocacoesPorProfessor(nome);
 	}
 
 	private void validarCursoAlocado(Alocacao alocacao, String nomeCurso) throws CursoPreenchidoException {
 		ArrayList<Alocacao> procurarAlocado = procurarTodos();
 		for (Alocacao item : procurarAlocado) {
 			if (item.getCurso().getNomeCurso().equals(nomeCurso)) {
-				throw new CursoPreenchidoException("Curso " +
-						item.getCurso().getNomeCurso() + " ja esta ministrado pelo professor(a) " + item.getProfessor().getNome());
+				throw new CursoPreenchidoException("Curso " + item.getCurso().getNomeCurso()
+						+ " ja esta ministrado pelo professor(a) " + item.getProfessor().getNome());
 			}
 		}
 	}
