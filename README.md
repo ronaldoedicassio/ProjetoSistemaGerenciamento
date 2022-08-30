@@ -3,6 +3,7 @@
  Projeto elaborado para estudos em grupo para colocar em prática a teoria de sala de aula
  
  ##Projeto##
+ 
  Uma instituição de ensino contratou sua equipe para desenvolver uma aplicação para gerir o sistema de alocação de seus professores. Esta instituição possui diversos departamentos. Cada departamento faz parte de uma área: 
  - Humanas, 
  - Exatas ou
@@ -13,13 +14,13 @@ O PO ( product owner ) afirma que gostaria de uma aplicação para gerenciar o c
 FUNCIONALIDADES
 1. Realizar o cadastro dos departamentos pelo sistema administrativo
 1.1. Um departamento possui as seguintes informações:
-1.1.1. Nome
-1.1.2. Área
-1.1.3. Sigla
-1.2. Um departamento possui as seguintes regras:
-1.2.1. O nome do departamento não pode ser vazio e deve ter pelo menos dois caracteres
-1.2.2. Não podem existir dois departamentos com o mesmo nome em uma mesma área
-1.2.3. A sigla do departamento não pode ser igual a sigla de nenhum outro item que possua sigla, como outros cursos ou departamentos.
+3.1.1. Nome
+4.1.2. Área
+5.1.3. Sigla
+6.2. Um departamento possui as seguintes regras:
+7.2.1. O nome do departamento não pode ser vazio e deve ter pelo menos dois caracteres
+8.2.2. Não podem existir dois departamentos com o mesmo nome em uma mesma área
+9.2.3. A sigla do departamento não pode ser igual a sigla de nenhum outro item que possua sigla, como outros cursos ou departamentos.
 
 2. Realizar o cadastro do curso
 2.1. Um curso possui as seguintes
